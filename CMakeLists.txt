@@ -68,6 +68,7 @@ install(
   PROGRAMS
   scripts/minimal_py_publisher.py
   scripts/minimal_py_subscriber.py
+  scripts/minimal_py_parameters.py
   #scripts/example3.py
   #scripts/example4.py
   #scripts/example5.py
