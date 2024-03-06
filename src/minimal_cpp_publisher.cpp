@@ -84,16 +84,16 @@ private:
 int main(int argc, char * argv[])
 {
 
-  // Initialize ROS 2.
-  rclcpp::init(argc, argv); 
+    // Initialize ROS 2.
+    rclcpp::init(argc, argv); 
   
-  // Create an instance of the MinimalPublisher node and keep it running.
-  auto minimal_publisher_node = std::make_shared<MinimalPublisher>();
-  rclcpp::spin(minimal_publisher_node);
+    // Create an instance of the MinimalPublisher node and keep it running.
+    auto minimal_publisher_node = std::make_shared<MinimalPublisher>();
+    rclcpp::spin(minimal_publisher_node);
 
-  // Shutdown ROS 2 upon node termination.
-  rclcpp::shutdown(); 
+    // Shutdown ROS 2 upon node termination.
+    rclcpp::shutdown(); 
 
-  // End of program.
-  return 0; 
+    // End of program.
+    return 0; 
 }

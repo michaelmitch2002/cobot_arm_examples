@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/ubuntu/ros2_ws/install/cobot_arm_examples/include/**",
+        "/opt/ros/iron/include/**",
+        "/home/ubuntu/ros2_ws/src/cobot_arm_examples/include/**",
+        "/home/ubuntu/ros2_ws/src/kinova_robot_arm/kinova_robot_arm_description/include/**",
+        "/home/ubuntu/ros2_ws/src/mycobot_ros2/mycobot_description/include/**",
+        "/home/ubuntu/ros2_ws/src/ur_robotiq/ur_robotiq_description/include/**",
+        "include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
