@@ -15,12 +15,14 @@ find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_python REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
+find_package(rcl_interfaces REQUIRED)
 find_package(std_msgs REQUIRED)
 
 # Define a CMake variable named dependencies that lists all
 # ROS 2 packages and other dependencies the project requires.
 set(dependencies
   rclcpp
+  rcl_interfaces
   std_msgs
 )
 
@@ -41,6 +43,9 @@ ament_target_dependencies(minimal_cpp_publisher ${dependencies})
 add_executable(minimal_cpp_subscriber src/minimal_cpp_subscriber.cpp)
 ament_target_dependencies(minimal_cpp_subscriber ${dependencies})
 
+add_executable(minimal_cpp_parameters src/minimal_cpp_parameters.cpp)
+ament_target_dependencies(minimal_cpp_parameters ${dependencies})
+
 # Copy necessary files to designated locations in the project
 install (
   DIRECTORY cobot_arm_examples scripts
@@ -57,6 +62,7 @@ install(
   TARGETS
   minimal_cpp_publisher
   minimal_cpp_subscriber
+  minimal_cpp_parameters
   DESTINATION lib/${PROJECT_NAME}
 )
 

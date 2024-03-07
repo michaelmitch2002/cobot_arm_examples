@@ -15,6 +15,7 @@
   <depend>rclcpp</depend>
   <depend>rclpy</depend>
   <depend>std_msgs</depend>
+  <depend>rcl_interfaces</depend>
 
   <!--Specifies dependencies that are only needed for testing the package-->
   <test_depend>ament_lint_auto</test_depend>
