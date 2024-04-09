@@ -21,74 +21,35 @@ import rclpy # Import the ROS 2 client library for Python
 from rclpy.node import Node # Import the Node class for creating ROS 2 nodes
 
 from std_msgs.msg import String # Import the String message type for publishing
+from nav_msgs.msg import Odometry
 
 
-class MinimalPublisher(Node):
+class OdometryPublisher(Node):
     """Create MinimalPublisher node.
 
     """
-    def __init__(self):
-        """ Create a custom node class for publishing messages
+     def __init__(self):
+        super().__init__('odometry_publisher')
+        self.publisher_ = self.create_publisher(Odometry, 'odometry', 10)
 
-        """
-
-        # Initialize the node with a name
-        super().__init__('minimal_publisher')
-
-        # Creates a publisher on the topic "topic" with a queue size of 10 messages
-        self.publisher_1 = self.create_publisher(String, '/topic', 10)
-
-        # Create a timer with a period of 0.5 seconds to trigger the callback function
-        timer_period = 0.5  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)   
-
-        # Initialize a counter variable for message content
-        self.i = 0
-
-    def timer_callback(self):
-        """Callback function executed periodically by the timer.
-
-        """
-        # Create a new String message object
-        msg = String()
-
-        # Set the message data with a counter
-        msg.data = 'Hello World: %d' % self.i
-
-        # Publish the message on the topic
-        self.publisher_1.publish(msg)
-
-        # Log a message indicating that the message has been published
-        self.get_logger().info('Publishing: "%s"' % msg.data)
-
-        # Increment the counter for the next message
-        self.i = self.i + 1
-
+    def publish_odometry(self, x, y, z, quat_x, quat_y, quat_z, quat_w):
+        msg = Odometry()
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.pose.pose.position.x = x
+        msg.pose.pose.position.y = y
+        msg.pose.pose.position.z = z
+        msg.pose.pose.orientation.x = quat_x
+        msg.pose.pose.orientation.y = quat_y
+        msg.pose.pose.orientation.z = quat_z
+        msg.pose.pose.orientation.w = quat_w
+        self.publisher_.publish(msg)
 
 def main(args=None):
-    """Main function to start the ROS 2 node.
-
-    Args:
-        args (List, optional): Command-line arguments. Defaults to None.
-    """
-
-    # Initialize ROS 2 communication
     rclpy.init(args=args)
-
-    # Create an instance of the MinimalPublisher node
-    minimal_publisher = MinimalPublisher()
-
-    # Keep the node running and processing events.
-    rclpy.spin(minimal_publisher)
-
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
-    minimal_publisher.destroy_node()
-
-    # Shutdown ROS 2 communication
+    node = OdometryPublisher()
+    rclpy.spin(node)
+    node.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':
-    # Execute the main function if the script is run directly
     main()
